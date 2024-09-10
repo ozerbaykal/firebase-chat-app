@@ -20,13 +20,15 @@ const ChatPage = ({ room, setRoom }) => {
   //form gönderilince mesajı veri tabanına kaydet
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //mesaj boş mu kontrol et boşsa durdur
+    if(text.trim() ==="") return
 
     //mesaj document'inin kaydedileceği koleksiyonun refaransını al
     const messagesCol = collection(db, "messages");
 
     //refansı alınan koleksiyona document'i ekle
     await addDoc(messagesCol, {
-      text: e.target[0].value,
+      text,
       room,
       author: {
         id: auth.currentUser.uid,
